@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bagk2vfdyk0u6"]
+
+[ext_resource type="Script" path="res://example_project/example_map/example_map.gd" id="1_4paoi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nui8f"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_okqyk"]
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_4paoi")
+
+[node name="cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+mesh = SubResource("BoxMesh_nui8f")
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_okqyk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5, 1, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5, -0.612372, 0.612372, 0, 0.707107, 0.707107, -0.866025, 0.353553, -0.353553, 0, 6.41808, 0)
+shadow_enabled = true

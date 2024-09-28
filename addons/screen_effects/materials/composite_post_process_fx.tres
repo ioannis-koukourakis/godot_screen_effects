@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ly0qwfq6p33i"]
+
+[ext_resource type="Shader" path="res://addons/screen_effects/shaders/composite_post_process_fx.gdshader" id="1_cimsv"]
+
+[resource]
+shader = ExtResource("1_cimsv")
+shader_parameter/damage_amount = 0.0
+shader_parameter/screen_blur_amount = 0.0
+shader_parameter/radial_blur_amount = 0.0
+shader_parameter/radial_blur_center_position = Vector2(0.5, 0.5)
+shader_parameter/motion_blur_velocity = Vector2(0, 0)
