@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 EffectsHandler="*res://addons/screen_effects/scripts/effects_handler.gd"
+ScreenEffects="*res://addons/screen_effects/scripts/effects_handler.gd"
 
 [display]
 

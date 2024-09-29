@@ -11,6 +11,7 @@ const F_SHAKE_FORCE_MUL = 8.0;
 #-------------------------------------------------------
 
 var mfShake: float = 0.0;
+var mfLastShake: float = 0.0;
 var mfRate: float = 0.0;
 var mNoise: FastNoiseLite;
 
@@ -42,9 +43,10 @@ func Process(afTimeStep : float)->void:
 
 func ProcessShake(afTimeStep: float)->void:
 	mfTimeElapsed += afTimeStep;
-	mfShake = mNoise.get_noise_2d(mfTimeElapsed, 0);
-	mfShake += mNoise.get_noise_2d(0, mfTimeElapsed);
-	mfShake *= F_SHAKE_FORCE_MUL * (mfAmount * mfMultiplier);
+	var fShake = mNoise.get_noise_1d(mfTimeElapsed);
+	var fT: float = clamp(mfRate * 0.1, 0.0, 1.0);
+	mfShake = lerpf(mfLastShake, fShake * (mfAmount * mfMultiplier), fT);
+	mfLastShake = mfShake;
 
 #-------------------------------------------------------
 

@@ -5,6 +5,7 @@ class_name cScreenShake extends cEffect_Base
 #-------------------------------------------------------
 
 var mvShake: Vector2;
+var mvLastShake: Vector2;
 var mfRate: float;
 var mNoise: FastNoiseLite;
 
@@ -39,10 +40,13 @@ func Process(afTimeStep: float)->void:
 
 func ProcessShake(afTimeStep: float)->void:
 	mfTimeElapsed += afTimeStep;
-	var vShake = Vector2.ZERO;
-	vShake.x = mNoise.get_noise_2d(mfTimeElapsed, 0);
-	vShake.y = mNoise.get_noise_2d(0, mfTimeElapsed);
-	mvShake = vShake * (mfAmount * mfMultiplier);
+	var vShake: Vector2 = Vector2.ZERO;
+	vShake.x = mNoise.get_noise_2d(mfTimeElapsed, 0) * (mfAmount * mfMultiplier);
+	vShake.y = mNoise.get_noise_2d(0, mfTimeElapsed) * (mfAmount * mfMultiplier);
+	var fT: float = clamp(mfRate * 0.1, 0.0, 1.0);
+	mvShake.x = lerpf(mvLastShake.x, vShake.x, fT);
+	mvShake.y = lerpf(mvLastShake.y, vShake.y, fT);
+	mvLastShake = mvShake;
 
 #-------------------------------------------------------
 
