@@ -3,6 +3,34 @@ class_name cMap extends Node
 #-------------------------------------------------------
 
 var mlRadialBlurInstanceID: int = -1;
+var mInfoLabel: RichTextLabel;
+
+#-------------------------------------------------------
+
+func _ready():
+	#########################
+	# Create a new Label to show the controls.
+	mInfoLabel = RichTextLabel.new();
+	mInfoLabel.bbcode_enabled = true;
+	mInfoLabel.anchor_right = 1.0;
+	mInfoLabel.anchor_bottom = 0.5;
+	mInfoLabel.text = "[color=green]Controls[/color]
+		Add Radial Blur instance: [color=light_green]Press 1[/color]
+		Add Camera FOV Shake instance: [color=light_green]Press 2[/color]
+		Add Screen Shake instance: [color=light_green]Press 3[/color]
+		Add Camera FOV Fade instance: [color=light_green]Press 4[/color]
+		Add Screen Blur instance: [color=light_green]Press 5[/color]
+		Add Screen Color Fade instance: [color=light_green]Press 6[/color]
+		Add indefinite Radial Blur instance: [color=light_green]Press 7[/color]
+		Modify indefinite Radial Blur instance amount: [color=light_green]Press 8[/color]
+		Remove indefinite Radial Blur instance (fade out): [color=light_green]Press 9[/color]
+		Toggle Motion Blur on/off: [color=light_green]Press 0[/color]
+		Rotate Camera Left (Motion Blur preview): [color=light_green]Press Left Arrow[/color]
+		Rotate Camera Right (Motion Blur preview): [color=light_green]Press Right Arrow[/color]
+		";
+	mInfoLabel.position = Vector2(10, 10);
+	mInfoLabel.add_theme_color_override("font_color", Color(1, 1, 1));
+	add_child(mInfoLabel);
 
 #-------------------------------------------------------
 
@@ -49,7 +77,7 @@ func _input(aEvent: InputEvent) -> void:
 		# Add screen color fade instance.
 		# Multiple can be added at a time. An instance is added every time key is pressed.
 		if (lKeycode == KEY_6):
-			EffectsHandler.AddScreenFade(2.0, Color(0.0,0.1,0.2,0.5), Color(1.0,0,0,0));
+			EffectsHandler.AddScreenFade(2.0, Color(1.0,0.0,0.0,0.8), Color(0.0,0.0,1.0,0.0));
 			get_tree().get_root().set_input_as_handled();
 		
 		################################
