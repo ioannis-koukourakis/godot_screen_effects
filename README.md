@@ -2,6 +2,8 @@
 
 This is a **Full Screen Effects** addon for Godot 4, specifically designed for **3D projects**. The plugin provides a collection of full-screen effects that can be used to enhance the visuals of your game. It supports multiple instances of each effect, a fade system for smooth transitions, and includes an example project to help you get started.
 
+![Alt text](./preview.gif)
+
 ## Features
 
 - **Full Screen Effects:**
