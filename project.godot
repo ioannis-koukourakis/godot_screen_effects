@@ -21,8 +21,12 @@ EffectsHandler="*res://addons/screen_effects/scripts/effects_handler.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[editor]
+
+movie_writer/movie_file="E:/_gamedev/godot_screen_effects/movie.avi"
 
 [editor_plugins]
 

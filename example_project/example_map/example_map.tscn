@@ -1,29 +1,79 @@
-[gd_scene load_steps=4 format=3 uid="uid://bagk2vfdyk0u6"]
+[gd_scene load_steps=10 format=3 uid="uid://bagk2vfdyk0u6"]
 
 [ext_resource type="Script" path="res://example_project/example_map/example_map.gd" id="1_4paoi"]
+[ext_resource type="Material" uid="uid://dw8htv6c3rhrs" path="res://example_project/materials/dev_material_02.tres" id="2_bcs2b"]
+[ext_resource type="Texture2D" uid="uid://dbbllwugem3gi" path="res://example_project/textures/dev_texture.png" id="2_xh2y2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nui8f"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxmw1"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_xh2y2")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_okqyk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6e47s"]
+
+[sub_resource type="Sky" id="Sky_y4jmx"]
+sky_material = SubResource("ProceduralSkyMaterial_6e47s")
+
+[sub_resource type="Environment" id="Environment_8vh72"]
+background_mode = 2
+sky = SubResource("Sky_y4jmx")
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_4paoi")
 
-[node name="cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
-mesh = SubResource("BoxMesh_nui8f")
-
-[node name="cube2" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 9, 1, 9)
-mesh = SubResource("BoxMesh_nui8f")
-
-[node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
-mesh = SubResource("PlaneMesh_okqyk")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5, 1, 4)
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5, 2, 4)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.5, -0.612372, 0.612372, 0, 0.707107, 0.707107, -0.866025, 0.353553, -0.353553, 0, 6.41808, 0)
+transform = Transform3D(-0.5, -0.612372, 0.612373, -0.407628, 0.790294, 0.457466, -0.764094, -0.0208872, -0.644767, 0, 6.41808, 0)
 shadow_enabled = true
+
+[node name="geometry" type="Node3D" parent="."]
+
+[node name="cube" type="MeshInstance3D" parent="geometry"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+mesh = SubResource("BoxMesh_nui8f")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_bcs2b")
+
+[node name="cube2" type="MeshInstance3D" parent="geometry"]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 20, 11, 2, 0)
+material_override = ExtResource("2_bcs2b")
+mesh = SubResource("BoxMesh_nui8f")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yxmw1")
+
+[node name="cube4" type="MeshInstance3D" parent="geometry"]
+transform = Transform3D(24, 0, 0, 0, 4, 0, 0, 0, 2, 0, 2, -11)
+material_override = ExtResource("2_bcs2b")
+mesh = SubResource("BoxMesh_nui8f")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yxmw1")
+
+[node name="cube5" type="MeshInstance3D" parent="geometry"]
+transform = Transform3D(24, 0, 0, 0, 4, 0, 0, 0, 2, 0, 2, 11)
+material_override = ExtResource("2_bcs2b")
+mesh = SubResource("BoxMesh_nui8f")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yxmw1")
+
+[node name="cube3" type="MeshInstance3D" parent="geometry"]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 20, -11, 2, 0)
+material_override = ExtResource("2_bcs2b")
+mesh = SubResource("BoxMesh_nui8f")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yxmw1")
+
+[node name="floor" type="MeshInstance3D" parent="geometry"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_okqyk")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yxmw1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8vh72")
