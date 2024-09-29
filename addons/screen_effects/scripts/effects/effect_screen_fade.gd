@@ -48,7 +48,7 @@ func Process(afDeltaTime : float)->void:
 		fT = clamp(fT, 0.0, 1.0);
 		mFadeColorOut = LerpToColor(mFadeStartColor, mFadeTargetColor, fT);
 		
-		if (mFadeColorOut == mFadeTargetColor): # || mfFadeTimeElapsed >= mfFadeDuration):
+		if (mFadeColorOut == mFadeTargetColor):
 			mbFadeInProgress = false;
 			mFadeColorOut = mFadeTargetColor;
 

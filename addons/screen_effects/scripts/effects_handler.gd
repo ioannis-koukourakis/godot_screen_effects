@@ -4,7 +4,6 @@ class_name cEffectsHandler extends Node
 # SETTINGS
 #-------------------------------------------------------
 
-const F_SPRINT_FOV_MULTIPLIER: float = 1.05;
 const B_LINEAR_VELOCITY_MOTION_BLUR_ACTIVE: bool = false;
 
 #-------------------------------------------------------
@@ -126,6 +125,7 @@ func _process(afDeltaTime : float)->void:
 	####################################################################################################
 	# Apply fov fade, fov shake
 	var fNewFov: float = (mfDefaultFov * fFovMul) + fFovShake;
+	fNewFov = clamp(fNewFov, 1.0, 179.0);
 	mCamera.set_fov(fNewFov);
 	
 	
@@ -150,7 +150,7 @@ func _process(afDeltaTime : float)->void:
 		# Remove shake inst if done
 		if (pCurrShake.GetEnded()):
 			mvScreenShakeInst.remove_at(i);
-			
+	
 	mCamera.h_offset = vScreenShake.y;
 	mCamera.v_offset = vScreenShake.x;
 	
@@ -175,15 +175,14 @@ func _process(afDeltaTime : float)->void:
 			#########################
 			# Sum up the amount of all instances
 			fRadialBlurAmount += pRadialBlur.GetAmount();
-			
-			vRadialBlurCenterPos = pRadialBlur.mvFocusPosition;
+			vRadialBlurCenterPos = pRadialBlur.mvFocusPosition; # only take into account the last entry for this
 			
 			#########################
 			# Remove inst if done
 			if (pRadialBlur.GetEnded()):
 				mvRadialBlurInst.remove_at(i);
 		
-		fRadialBlurAmount = clamp(fRadialBlurAmount, 0.0, 1.0);
+		fRadialBlurAmount = clamp(fRadialBlurAmount, 0.0, 5.0);
 		pViewport.material.set_shader_parameter("radial_blur_amount", fRadialBlurAmount);
 		pViewport.material.set_shader_parameter("radial_blur_center_position", vRadialBlurCenterPos);
 		
@@ -241,7 +240,7 @@ func _process(afDeltaTime : float)->void:
 		#############################################################################################################
 		# Motion Blur
 		if (mbMotionBlurActive):
-			var vDesiredMotionBlur: Vector2 = Vector2(0.0, 0.0);
+			var vDesiredMotionBlur: Vector2 = Vector2.ZERO;
 			
 			#########################
 			# Apply angular velocity
