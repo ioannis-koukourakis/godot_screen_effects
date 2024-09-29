@@ -43,7 +43,7 @@ To add a radial blur effect instance, use the following function call:
 # fade-in of 1.0 second, duration of 1.0 second, 
 # and fade-out of 3.0 seconds.
 
-EffectsHandler.AddRadialBlur(1.25, 1.0, 1.0, 3.0)
+ScreenEffects.AddRadialBlur(1.25, 1.0, 1.0, 3.0)
 ```
 
 ### Manipulating Effect Instances
@@ -56,17 +56,17 @@ var mlRadialBlurInstanceID: int = -1
 ###################################################
 # Add a Radial Blur effect with no fade-out (runs indefinitely).
 if mlRadialBlurInstanceID == -1:
-    mlRadialBlurInstanceID = EffectsHandler.AddRadialBlur(1.25, 1.0, -1.0, 3.0)
+    mlRadialBlurInstanceID = ScreenEffects.AddRadialBlur(1.25, 1.0, -1.0, 3.0)
 
 ####################################################
 # Update the amount of the Radial Blur effect to 0.5.
 if mlRadialBlurInstanceID != -1:
-    EffectsHandler.SetRadialBlurAmount(mlRadialBlurInstanceID, 0.5)
+    ScreenEffects.SetRadialBlurAmount(mlRadialBlurInstanceID, 0.5)
 
 #####################################################
 # Stop the Radial Blur effect and reset the ID.
 if mlRadialBlurInstanceID != -1:
-    EffectsHandler.StopRadialBlur(mlRadialBlurInstanceID)
+    ScreenEffects.StopRadialBlur(mlRadialBlurInstanceID)
     mlRadialBlurInstanceID = -1
 
 ```
