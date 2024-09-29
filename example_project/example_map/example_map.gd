@@ -11,7 +11,7 @@ func _input(aEvent: InputEvent) -> void:
 		var lKeycode: int = aEvent.get_physical_keycode_with_modifiers();
 		
 		################################
-		# Add FOV shake instance
+		# Add Radial blur instance
 		# Multiple can be added at a time. An instance is added every time key is pressed.
 		if (lKeycode == KEY_1):
 			EffectsHandler.AddRadialBlur(1.25, 1.0, 1.0, 3.0);
@@ -53,7 +53,7 @@ func _input(aEvent: InputEvent) -> void:
 			get_tree().get_root().set_input_as_handled();
 		
 		################################
-		# Add a single radial blur instance and store its ID.
+		# Add a single radial blur instance and store its ID for later use.
 		if (lKeycode == KEY_7):
 			if (mlRadialBlurInstanceID == -1):
 				mlRadialBlurInstanceID = EffectsHandler.AddRadialBlur(1.25, 1.0, -1.0, 3.0);
@@ -86,6 +86,8 @@ func _input(aEvent: InputEvent) -> void:
 func _physics_process(afTimeStep: float) -> void:
 	if (is_instance_valid($Camera3D)==false): return;
 	
+	######################################
+	# Rotate camera to showcase motion blur
 	if (Input.is_action_pressed("ui_left")):
 		$Camera3D.rotate_y(afTimeStep * 30);
 	
