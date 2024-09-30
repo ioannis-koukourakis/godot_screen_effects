@@ -69,7 +69,9 @@ func _ready() -> void:
 	if (is_instance_valid(pViewport)):
 		pViewport.material.set_shader_parameter("motion_blur", 0.0);
 		pViewport.material.set_shader_parameter("motion_blur_velocity", Vector2(0.0, 0.0));
-		pViewport.material.set_shader_parameter("damage_amount", 0.0);
+		pViewport.material.set_shader_parameter("radial_blur_amount", 0.0);
+		pViewport.material.set_shader_parameter("radial_blur_center_position", Vector2(0.5, 0.5));
+		pViewport.material.set_shader_parameter("screen_blur_amount", 0.0);
 
 #-------------------------------------------------------
 
@@ -579,5 +581,10 @@ func StopEffectInstances(avInstances: Array) -> void:
 				pInst.Stop(0.0);
 	
 	avInstances.clear();
+
+#-------------------------------------------------------
+
+func SetCamera(aCamera: Camera3D)->void:
+	mCamera = aCamera;
 
 #-------------------------------------------------------

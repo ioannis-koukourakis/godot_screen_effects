@@ -4,7 +4,6 @@ shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform sampler2D viewport_texture;
-uniform float damage_amount : hint_range(0.0, 1.0) = 0.0;
 uniform float screen_blur_amount: hint_range(0.0, 1.0) = 0.0;
 uniform float radial_blur_amount : hint_range(0.0, 1.0) = 0.0;
 uniform vec2 radial_blur_center_position = vec2(0.5, 0.5);
@@ -42,14 +41,9 @@ void fragment()
 
 	vScreenCol /= float(lBlurSamples);
 	
-	/////////////////////
-	// Damage effect
-	float fDamageMul = texture(viewport_texture, SCREEN_UV).r;
-	vec3 vColor = mix(vScreenCol, vec3(0.35, 0.0, 0.0), (1.0 - fDamageMul) * damage_amount);
-	
 	//////////////////
 	// Output
-	COLOR.rgb = vColor;
+	COLOR.rgb = vScreenCol;
 	COLOR.a = 1.0;
 }
 
